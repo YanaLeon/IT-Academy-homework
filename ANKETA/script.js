@@ -73,9 +73,9 @@ function checkAge (){
     }
     return age;
 }
-
+let gender;
 function chooseGender (){
-    let gender = confirm('Выбирите ваш пол: Если "мужской" нажмите "ОК", если "женский" нажмите "ОТМЕНА"');
+    gender = confirm('Выбирите ваш пол: Если "мужской" нажмите "ОК", если "женский" нажмите "ОТМЕНА"');
     if (gender){
         let resultGender = 'мужской';
         return resultGender;
@@ -93,7 +93,7 @@ function showDate (){
     let ageNumber = parseInt(resultAge);
     let showGender = chooseGender();
     let retire;
-    if ((showGender === 'мужской' && ageNumber <=60) || (showGender === 'женский' && ageNumber <=50)){
+    if ((gender === true && ageNumber <=60) || (gender === false && ageNumber <=50)){
         retire = 'нет';
     } else {
         retire = 'да';
