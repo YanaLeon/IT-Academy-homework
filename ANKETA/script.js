@@ -1,5 +1,8 @@
 function checkName (){
     let name = prompt ('Введите ваше имя');
+    while (name === null) {
+        name = prompt ('Для того чтобы продолжить, укажите ваше имя');
+    }
     let check = false;
     while(check === false){
         if (name.length <= 2){
@@ -22,6 +25,9 @@ function checkName (){
 function checkPatronymic (){
     let patronymic = prompt ('Введите ваше отчество');
     let check = false;
+    while (patronymic === null) {
+        patronymic = prompt ('Для того чтобы продолжить, укажите ваше отчество');
+    }
     while(check == false){
         if (patronymic.length <= 2){
             patronymic = prompt ("Введите корректные данные, типа Ваше отчество: Иванович");
@@ -42,6 +48,9 @@ function checkPatronymic (){
 function checkSurname (){
     let surname = prompt ('Введите вашу фамилию');
     let check = false;
+    while (surname === null) {
+        surname = prompt ('Для того чтобы продолжить, укажите вашу фамилию');
+    }
     while(check == false){
         if (surname.length <= 2){
             surname = prompt ("Введите корректные данные, типа Ваша фамилия: Иванов");
@@ -64,8 +73,9 @@ function checkAge (){
     let check = false;
     while (check === false) {
         let ageNumber = Number(age);
-        console.log(Number.isNaN(ageNumber));
-        if (Number.isNaN(ageNumber) === true){
+        if (age.length < 1 || age === null){
+            age = prompt ("Для того чтобы продолжить, укажите ваш возраст");
+        } else if (Number.isNaN(ageNumber) === true){
             age = prompt ("Введите ваш возраст, данные должны содержать только числа");
         } else {
             check = true;
