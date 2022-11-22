@@ -71,9 +71,12 @@ function checkSurname (){
 function checkAge (){
     let age = prompt ("Введите ваш возраст");
     let check = false;
+    while (age === null) {
+        age = prompt ('Для того чтобы продолжить, укажите ваш возраст');
+    }
     while (check === false) {
         let ageNumber = Number(age);
-        if (age.length < 1 || age === null){
+        if (age.length < 1){
             age = prompt ("Для того чтобы продолжить, укажите ваш возраст");
         } else if (Number.isNaN(ageNumber) === true){
             age = prompt ("Введите ваш возраст, данные должны содержать только числа");
