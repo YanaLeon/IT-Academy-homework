@@ -1,11 +1,10 @@
 function checkName (){
     let name = prompt ('Введите ваше имя');
-    while (name === null) {
-        name = prompt ('Для того чтобы продолжить, укажите ваше имя');
-    }
     let check = false;
     while(check === false){
-        if (name.length <= 2){
+        if (name === null) {
+            name = prompt ('Для того чтобы продолжить, укажите ваше имя');
+        } else if (name.length <= 2){
             name = prompt ("Введите корректные данные, типа Ваше имя: Василий");
         } else if ((name.length >= 2)){
             for (let i = 0; i < name.length; i++){
@@ -25,11 +24,10 @@ function checkName (){
 function checkPatronymic (){
     let patronymic = prompt ('Введите ваше отчество');
     let check = false;
-    while (patronymic === null) {
-        patronymic = prompt ('Для того чтобы продолжить, укажите ваше отчество');
-    }
     while(check == false){
-        if (patronymic.length <= 2){
+        if (patronymic === null) {
+            patronymic = prompt ('Для того чтобы продолжить, укажите ваше отчество');
+        } else if (patronymic.length <= 2){
             patronymic = prompt ("Введите корректные данные, типа Ваше отчество: Иванович");
         } else {
             for (let i = 0; i < patronymic.length; i++){
@@ -48,11 +46,10 @@ function checkPatronymic (){
 function checkSurname (){
     let surname = prompt ('Введите вашу фамилию');
     let check = false;
-    while (surname === null) {
-        surname = prompt ('Для того чтобы продолжить, укажите вашу фамилию');
-    }
     while(check == false){
-        if (surname.length <= 2){
+        if (surname === null) {
+            surname = prompt ('Для того чтобы продолжить, укажите вашу фамилию');
+        } else if (surname.length <= 2){
             surname = prompt ("Введите корректные данные, типа Ваша фамилия: Иванов");
         } else {
             for (let i = 0; i < surname.length; i++){
@@ -71,12 +68,11 @@ function checkSurname (){
 function checkAge (){
     let age = prompt ("Введите ваш возраст");
     let check = false;
-    while (age === null) {
-        age = prompt ('Для того чтобы продолжить, укажите ваш возраст');
-    }
     while (check === false) {
         let ageNumber = Number(age);
-        if (age.length < 1){
+        if (age === null) {
+            age = prompt ('Для того чтобы продолжить, укажите ваш возраст');
+        } else if (age.length < 1){
             age = prompt ("Для того чтобы продолжить, укажите ваш возраст");
         } else if (Number.isNaN(ageNumber) === true){
             age = prompt ("Введите ваш возраст, данные должны содержать только числа");
