@@ -8,7 +8,7 @@ function checkName (){
             name = prompt ("Введите корректные данные, типа Ваше имя: Василий");
         } else if ((name.length >= 2)){
             for (let i = 0; i < name.length; i++){
-                if (name[i] === '0' || name[i] === '1' || name[i] === '2' || name[i] === '3' || name[i] === '4' || name[i] === '5' || name[i] === '6' || name[i] === '7' || name[i] === '8' || name[i] === '9' || name[i] === '!' || name[i] === '?' || name[i] === ',' || name[i] === '.') {
+                if (name[i] >= '0' && name[i]  <= '9'){
                     name = prompt ("Имя не должно содержать чисел или других знаков");
                 } else {
                     check = true;
@@ -31,7 +31,7 @@ function checkPatronymic (){
             patronymic = prompt ("Введите корректные данные, типа Ваше отчество: Иванович");
         } else {
             for (let i = 0; i < patronymic.length; i++){
-                if (patronymic[i] === '0' || patronymic[i] === '1' || patronymic[i] === '2' || patronymic[i] === '3' || patronymic[i] === '4' || patronymic[i] === '5' || patronymic[i] === '6' || patronymic[i] === '7' || patronymic[i] === '8' || patronymic[i] === '9' || patronymic[i] === '!' || patronymic[i] === '?' || patronymic[i] === ',' || patronymic[i] === '.') {
+                if (patronymic[i] >= '0' && patronymic[i]  <= '9') {
                     patronymic = prompt ("Отчество не должно содержать чисел или других знаков");
                 } else {
                     check = true;
@@ -53,7 +53,7 @@ function checkSurname (){
             surname = prompt ("Введите корректные данные, типа Ваша фамилия: Иванов");
         } else {
             for (let i = 0; i < surname.length; i++){
-                if (surname[i] === '0' || surname[i] === '1' || surname[i] === '2' || surname[i] === '3' || surname[i] === '4' || surname[i] === '5' || surname[i] === '6' || surname[i] === '7' || surname[i] === '8' || surname[i] === '9' || surname[i] === '!' || surname[i] === '?' || surname[i] === ',' || surname[i] === '.') {
+                if (surname[i] >= '0' && surname[i]  <= '9') {
                     surname = prompt ("Фамилия не должна содержать чисел или других знаков");
                 } else {
                     check = true;
