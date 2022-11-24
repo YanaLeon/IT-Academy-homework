@@ -1,18 +1,41 @@
 let phrase = prompt ("Напишите здесь свой текст")
 
-function redactorForPhrase (phrase){
+function redactorForPhraseNew (phrase){
+    let countRight = 0;
+    let countLeft = 0;
     for (let i = 0; i < phrase.length; i++){
-        if (phrase[0] === ' '){
-            let right = phrase.slice(1);
-            phrase = `${phrase[0] = '*'}${right}`
+        if(phrase[i] === ' '){
+            countRight += 1;
+        } else {
+            break;
         }
-        if (phrase[phrase.length - 1] === ' '){
-            let left = phrase.slice(0, -1);
-            phrase = `${left}${phrase[phrase.length - 1] = '*'}`
-        }
-        console.log(phrase[i]);
     }
-        return alert (phrase);
+    for (let i = phrase.length - 1; i >= 0; i--){
+        if(phrase[i] === ' '){
+            countLeft += 1;
+        } else {
+            break;
+        }
+    }
+    phrase = phrase.slice(countRight, phrase.length - countLeft);
+    console.log(phrase.length);
+    return alert (`*${phrase}*`);
+}
+
+redactorForPhraseNew (phrase)
+
+
+function redactorForPhrase (phrase){
+    let phraseNew = '';
+    for (let i = 0; i < phrase.length; i++){
+        if(phrase[i] === ' '){
+            continue;
+        } else {
+            phraseNew += phrase[i];
+        }
+    }
+    console.log(phraseNew.length);
+    return alert (`*${phraseNew}*`);
 }
 
 redactorForPhrase (phrase)
