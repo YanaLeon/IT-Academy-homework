@@ -12,4 +12,4 @@ function countVowels (string){
 }
 
 
-let result = alert (`В вашем тексте ${countVowels (string)} гласных`);
+console.log (`В вашем тексте ${countVowels (string)} гласных`);
