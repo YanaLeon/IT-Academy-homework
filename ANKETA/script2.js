@@ -19,10 +19,10 @@ function redactorForPhraseNew (phrase){
     }
     phrase = phrase.slice(countRight, phrase.length - countLeft);
     console.log(phrase.length);
-    return alert (`*${phrase}*`);
+    return `*${phrase}*`;
 }
 
-redactorForPhraseNew (phrase)
+let phraseResult = alert(redactorForPhraseNew (phrase));
 
 
 function redactorForPhrase (phrase){
@@ -38,4 +38,4 @@ function redactorForPhrase (phrase){
     return alert (`*${phraseNew}*`);
 }
 
-redactorForPhrase (phrase)
+// redactorForPhrase (phrase)
