@@ -5,7 +5,7 @@ function countVowels (string){
     let vowels = ['а', 'о', 'е', 'и', 'у', 'ю', 'я', 'ы', 'э', 'ё'];
     let count = 0;
     for(let i = 0; i < array.length; i++){
-        if(vowels.indexOf(array[i]) != -1){
+        if(vowels.indexOf(array[i]) >= 0){
             count++;
         }
     }
