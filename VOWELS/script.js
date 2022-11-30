@@ -2,14 +2,15 @@ let string = prompt('Введите ваш текст');
 
 function countVowels (string){
     let array = string.toLowerCase().split('');
-    let resultArray = [];
-    array.filter((elem) => {
-        if(elem === 'а' || elem === 'о' || elem === 'е'|| elem === 'и' || elem === 'у' || elem === 'ю' || elem === 'я' || elem === 'ы' || elem === 'э' || elem === 'ё'){
-            resultArray.push(elem);
+    let vowels = ['а', 'о', 'е', 'и', 'у', 'ю', 'я', 'ы', 'э', 'ё'];
+    let count = 0;
+    for(let i = 0; i < array.length; i++){
+        if(vowels.indexOf(array[i])){
+            count++;
         }
-    })
-    return resultArray.length;
+    }
+    return count;
 }
 
 
-console.log (`В вашем тексте ${countVowels (string)} гласных`);
+console.log(`В вашем тексте ${countVowels (string)} гласных`);
