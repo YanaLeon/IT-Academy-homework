@@ -9,22 +9,18 @@
         let obj = {};
         console.log( 'цветов: ' + colorsCount );
         for ( var i = 1; i <= colorsCount; i++ ) {
-            var n = randomDiap;
-            var colorName = colors[n(1,7)];
-            if ( !(colorName in obj) ){
-                obj[colorName] = true;
-            } else {
-                while((colorName in obj)){
-                    colorName = colors[n(1,7)];
-                    if (!(colorName in obj)){
-                        obj[colorName] = true;
-                        break;
-                    }
+            let check = true;
+            while(check === true){
+                var n = randomDiap(1,7);
+                var colorName = colors[n];
+                if(!(colorName in obj)){
+                    obj[colorName] = 1;
+                    check = false;
                 }
             }
         }
         for (let key in obj){
-            console.log(key)
+            console.log(key);
         }
     }
 
