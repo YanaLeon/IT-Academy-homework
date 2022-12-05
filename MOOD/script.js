@@ -5,19 +5,24 @@
     }
 
     function mood(colorsCount) {
-        var colors=[ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
+        var colors = [ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
         let obj = {};
         console.log( 'цветов: ' + colorsCount );
-        for ( var i=1; i<=colorsCount; i++ ) {
-            var n=randomDiap(1,7);
-            var colorName=colors[n];
-            if (colorName in obj){
-                colorsCount += 1;
+        for ( var i = 1; i <= colorsCount; i++ ) {
+            var n = randomDiap;
+            var colorName = colors[n(1,7)];
+            if ( !(colorName in obj) ){
+                obj[colorName] = true;
             } else {
-                obj[colorName] = 1;
+                while((colorName in obj)){
+                    colorName = colors[n(1,7)];
+                    if (!(colorName in obj)){
+                        obj[colorName] = true;
+                        break;
+                    }
+                }
             }
         }
-
         for (let key in obj){
             console.log(key)
         }
