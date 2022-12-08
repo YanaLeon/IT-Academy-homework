@@ -1,18 +1,17 @@
 let phrase = prompt("Введите текст для проверки");
 
 function isPalindrom (str){
-    let count = 0;
+    let result = true;
+    let length = Math.round(str.length/2);
     str = str.toLowerCase().replace(/\s|[!,."'?]/g, '');
-    for (let i = 0; i < str.length; i++){
+    for (let i = 0; i < length; i++){
         if(str[i] === str[str.length - i - 1]){
-            count++;
-            if(count >= 2){
-               return true;
-            }
+               result;
         } else {
-            return false;
+            return result = false;
         }
     }
+    return result;
 }
 console.log(isPalindrom (phrase))
 

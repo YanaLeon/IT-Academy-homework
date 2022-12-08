@@ -13,8 +13,8 @@ function redactorForPhraseNew (str){
         }
     }
     if(result === true){
-        console.log(result);
-        return str = 'Здесь только пробелы';
+        console.log(result, 'Здесь только пробелы');
+        return str = str.slice(countRight);
     }
 
     for (let i = str.length - 1; i >= 0; i--){
