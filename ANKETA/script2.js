@@ -12,7 +12,7 @@ function redactorForPhraseNew (str){
             break;
         }
     }
-    if(result === true){
+    if(result){
         console.log(result, 'Здесь только пробелы');
         return str = str.slice(countRight);
     }
