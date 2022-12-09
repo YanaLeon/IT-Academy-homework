@@ -1,25 +1,25 @@
+"use strict";
+
 let phrase = prompt ("Напишите здесь свой текст")
 
 function redactorForPhraseNew (str){
-    let countRight = 0;
     let countLeft = 0;
-    let result = true;
+    let countRight = 0;
     for (let i = 0; i < str.length; i++){
         if(str[i] === ' '){
-            countRight += 1;
+            countLeft += 1;
         } else {
-            result = false;
             break;
         }
     }
-    if(result){
-        console.log(result, 'Здесь только пробелы');
-        return str = str.slice(countRight);
+    if(countLeft === str.length){
+        console.log('Здесь только пробелы');
+        return str = '';
     }
 
     for (let i = str.length - 1; i >= 0; i--){
         if(str[i] === ' '){
-            countLeft += 1;
+            countRight += 1;
         } else {
             break;
         }
@@ -29,7 +29,7 @@ function redactorForPhraseNew (str){
         console.log(countRight, countLeft, 'нет пробелов');
         return str;
     } else {
-        str = str.slice(countRight, str.length - countLeft);
+        str = str.slice(countLeft, str.length - countRight);
         console.log(str.length);
         return str;
     }
