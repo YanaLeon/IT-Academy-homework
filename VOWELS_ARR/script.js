@@ -32,11 +32,11 @@ function countVowelsReduce (str){
     let vowels = ['а', 'о', 'е', 'и', 'у', 'ю', 'я', 'ы', 'э', 'ё'];
     let resultArray = array.reduce((acc, value) => {
         if(vowels.includes(value)){
-            acc.push(value);
+            acc++;
         }
         return acc;
-    }, [])
-    return resultArray.length;
+    }, 0)
+    return resultArray;
 }
 
 console.log(`В вашем тексте ${countVowelsReduce (string)} гласных`);
