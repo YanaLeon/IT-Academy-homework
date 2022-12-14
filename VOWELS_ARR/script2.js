@@ -1,24 +1,23 @@
 "use strict";
 
-let phrase = prompt("Введите текст для проверки").toLowerCase();
+let phrase = prompt("Введите текст для проверки");
 
 function isPalindrom (str){
-    if(str.length === 0){
-        return true;
+    str = str.toLowerCase().replace(/\s|[!,."'?]/g, '');
+    let length = Math.floor(str.length/2);
+    function clearStringisPalindrom (clearStr){
+        if(clearStr.length <= length){
+            return true;
+        }
+        if(clearStr[0] === clearStr[clearStr.length - 1]){
+            console.log(clearStr);
+            clearStr = clearStr.slice(1, clearStr.length - 1);
+            return clearStringisPalindrom(clearStr);
+        } else {
+            return false;
+        }
     }
-    if (str[0] === ' ' || str[0] === ',' || str[0] === '.' || str[0] === '!' || str[0] === '?' || str[0] === '"' || str[0] === '\'') {
-        str = str.slice(1);
-    }
-    if (str[str.length - 1] === ' ' || str[str.length - 1] === ',' || str[str.length - 1] === '.' || str[str.length - 1] === '!' || str[str.length - 1] === '?' || str[str.length - 1] === '"' || str[str.length - 1] === '\'') {
-        str = str.slice(0, str.length - 1)
-    }
-    if(str[0] === str[str.length - 1]){
-        str = str.slice(1, str.length - 1);
-        isPalindrom(str);
-    } else {
-        return false;
-    }
-    return true;
+    return clearStringisPalindrom(str);
 }
 console.log(isPalindrom (phrase))
 
