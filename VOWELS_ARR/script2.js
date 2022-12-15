@@ -4,13 +4,11 @@ let phrase = prompt("Введите текст для проверки");
 
 function isPalindrom (str){
     str = str.toLowerCase().replace(/\s|[!,."'?]/g, '');
-    let length = Math.floor(str.length/2);
     function clearStringisPalindrom (clearStr){
-        if(clearStr.length <= length){
+        if(clearStr.length === 0){
             return true;
         }
         if(clearStr[0] === clearStr[clearStr.length - 1]){
-            console.log(clearStr);
             clearStr = clearStr.slice(1, clearStr.length - 1);
             return clearStringisPalindrom(clearStr);
         } else {
