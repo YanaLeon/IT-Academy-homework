@@ -7,7 +7,7 @@ function HashStorageFunc (drink, alcohol, recipe) {
         self[drink] = {'алкогольный': alcohol, 'рецепт' : recipe};
     }
     self.getValue = function (drink){
-        return this[drink];
+        return self[drink];
     }
     self.deleteValue = function (drink){
         if(drink in self){
