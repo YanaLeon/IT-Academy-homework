@@ -1,28 +1,26 @@
-function HashStorageFunc (drink, alcohol, recipe) {
-    let self = this;
+function HashStorageFunc () {
+    let storage = 'storage';
+    this[storage] = {};
 
-    self[drink] = {'алкогольный': alcohol, 'рецепт' : recipe};
-
-    self.addValue = function (drink, alcohol, recipe){
-        self[drink] = {'алкогольный': alcohol, 'рецепт' : recipe};
+    this.addValue = function (key, [...value]){
+        this[storage][key] = value;
+        return this[storage];
     }
-    self.getValue = function (drink){
-        return self[drink];
+    this.getValue = function (key){
+        return this[storage][key];
     }
-    self.deleteValue = function (drink){
-        if(drink in self){
-            delete self[drink];
+    this.deleteValue = function (key){
+        if(key in this[storage]){
+            delete this[storage][key];
             return true;
         } else {
             return false;
         }
     }
-    self.getKeys = function (){
+    this.getKeys = function (){
         let array = [];
-        for (let key in self){
-            if(typeof self[key] != 'function'){
-                array.push(key);
-            }
+        for (let key in this[storage]){
+            array.push(key);
         }
         return array;
     }
