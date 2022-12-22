@@ -1,30 +1,30 @@
-function HashStorageFunc () {
-    this.storage = {};
+class HashStorageClass {
 
-    this.addValue = function (key, value){
-        this.storage[key] = value;
+    
+    addValue (key, value) {
+        this[key] = value;
     }
-    this.getValue = function (key){
-        return this.storage[key];
+    getValue (key) {
+        return this[key];
     }
-    this.deleteValue = function (key){
-        if(key in this.storage){
-            delete this.storage[key];
+    deleteValue(key){
+        if(key in this){
+            delete this[key];
             return true;
         } else {
             return false;
         }
     }
-    this.getKeys = function (){
+    getKeys () {
         let array = [];
-        for (let key in this.storage){
+        for (let key in this){
             array.push(key);
         }
         return array;
     }
 }
 
-let drinkStorage = new HashStorageFunc();
+let drinkStorage = new HashStorageClass ();
 
 function addDrink (){
     let nameDrink = prompt ('Введите название напитка');
