@@ -1,0 +1,9 @@
+input {
+    font-family: serif;
+    font-size: 15px;
+    background-color: #a0a0a0;
+    width: 300px;
+    height: 40px;
+    margin: 15px;
+    box-shadow: 5px 5px 7px rgb(73, 68, 68);
+}
