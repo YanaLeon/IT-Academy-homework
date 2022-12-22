@@ -1,15 +1,18 @@
 class HashStorageClass {
 
-    
+    constructor (){
+        this.storage = {};
+    }
+
     addValue (key, value) {
-        this[key] = value;
+        this.storage[key] = value;
     }
     getValue (key) {
-        return this[key];
+        return this.storage[key];
     }
     deleteValue(key){
-        if(key in this){
-            delete this[key];
+        if(key in this.storage){
+            delete this.storage[key];
             return true;
         } else {
             return false;
@@ -17,7 +20,7 @@ class HashStorageClass {
     }
     getKeys () {
         let array = [];
-        for (let key in this){
+        for (let key in this.storage){
             array.push(key);
         }
         return array;
@@ -25,6 +28,7 @@ class HashStorageClass {
 }
 
 let drinkStorage = new HashStorageClass ();
+console.log(drinkStorage)
 
 function addDrink (){
     let nameDrink = prompt ('Введите название напитка');
