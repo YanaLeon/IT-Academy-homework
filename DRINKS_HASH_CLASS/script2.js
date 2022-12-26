@@ -15,15 +15,15 @@ function buildWrapper (teg){
 function changeItem (array) {
     for (let i = 0; i < array.length; i++){
             if(array[i] === '<'){
-                array.splice(i, 1, '&lt;');
+                array[i] = '&lt;';
             } else if (array[i] === '>'){
-                array.splice(i, 1, '&gt;');
+                array[i] = '&gt;';
             } else if (array[i] === "'") {
-                array.splice(i, 1, '&apos;');
+                array[i] = '&apos;';
             } else if (array[i] === '"') {
-                array.splice(i, 1, '&quot;');
+                array[i] = '&quot;';
             } else if (array[i] === '&') {
-                array.splice(i, 1, '&amp;');
+                array[i] = '&amp;';
             }
         }
         return array.join('');
