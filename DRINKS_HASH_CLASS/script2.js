@@ -1,44 +1,34 @@
-function BuildWrapper (teg) {
-
-    this.teg = teg;
-
-    this.wrap=function(string, obj) {
-        string = string.split('');
-        let style = [];
-        for (let i = 0; i < string.length; i++){
-            if(string[i] === '<'){
-                string.splice(i, 1, '&lt;');
-            } else if (string[i] === '>'){
-                string.splice(i, 1, '&gt;');
-            } else if (string[i] === "'") {
-                string.splice(i, 1, '&apos;');
-            } else if (string[i] === '"') {
-                string.splice(i, 1, '&quot;');
-            } else if (string[i] === '&') {
-                string.splice(i, 1, '&amp;');
-            }
-        }
+function buildWrapper (teg){
+    return function (text, obj) {
+        let array = [];
+        let result = '';
         for (let key in obj) {
-            let array = Array.from(obj[key]);
-            for (let i = 0; i < array.length; i++) {
-                if(array[i] === '<'){
-                    array.splice(i, 1, '&lt;');
-                } else if (array[i] === '>'){
-                    array.splice(i, 1, '&gt;');
-                } else if (array[i] === "'") {
-                    array.splice(i, 1, '&apos;');
-                } else if (array[i] === '"') {
-                    array.splice(i, 1, '&quot;');
-                } else if (array[i] === '&') {
-                    array.splice(i, 1, '&amp;');
-                }
-            }
-            style.push(key + '=' + "'" + array.join('') + "'");
-        }
-        return string = `<${this.teg} ${style}>${string.join('')}</${this.teg}>`;
- }
+            array.push(key + '=');
+            let result = changeItem(Array.from(obj[key]));
+            array.push("'" + result + "'");
+        };
+        text = changeItem(text.split(''));
+        return result = `<${teg} ${array.join('')}>${text}</${teg}>`;
+    }
 }
 
-let wrapP = new BuildWrapper('P');
-console.log(wrapP);
-console.log(wrapP.wrap("СТИХИ",{align:"center",title:"M&M's"}));
+function changeItem (array) {
+    for (let i = 0; i < array.length; i++){
+            if(array[i] === '<'){
+                array.splice(i, 1, '&lt;');
+            } else if (array[i] === '>'){
+                array.splice(i, 1, '&gt;');
+            } else if (array[i] === "'") {
+                array.splice(i, 1, '&apos;');
+            } else if (array[i] === '"') {
+                array.splice(i, 1, '&quot;');
+            } else if (array[i] === '&') {
+                array.splice(i, 1, '&amp;');
+            }
+        }
+        return array.join('');
+}
+
+var wrapP = buildWrapper("P");
+
+console.log(wrapP("СТИХИ",{align:"center",title:"M&M's"}));
