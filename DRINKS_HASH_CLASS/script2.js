@@ -1,32 +1,34 @@
 function buildWrapper (teg){
     return function (text, obj) {
-        let array = [];
+        let style = '';
+        let resultStyle = '';
         let result = '';
         for (let key in obj) {
-            array.push(key + '=');
-            let result = changeItem(Array.from(obj[key]));
-            array.push("'" + result + "'");
-        };
-        text = changeItem(text.split(''));
-        return result = `<${teg} ${array.join('')}>${text}</${teg}>`;
+            style = changeItem(obj[key]);
+            resultStyle += ' ' + key + '=' + "'" + style + "'";
+        }
+        text = changeItem(text);
+        result = `<${teg}${resultStyle}>${text}</${teg}>`;
+        return result;
     }
 }
 
-function changeItem (array) {
-    for (let i = 0; i < array.length; i++){
-            if(array[i] === '<'){
-                array[i] = '&lt;';
-            } else if (array[i] === '>'){
-                array[i] = '&gt;';
-            } else if (array[i] === "'") {
-                array[i] = '&apos;';
-            } else if (array[i] === '"') {
-                array[i] = '&quot;';
-            } else if (array[i] === '&') {
-                array[i] = '&amp;';
+function changeItem (string) {
+    string = string.split('');
+    for (let i = 0; i < string.length; i++){
+            if(string[i] === '<'){
+                string[i] = '&lt;';
+            } else if (string[i] === '>'){
+                string[i] = '&gt;';
+            } else if (string[i] === "'") {
+                string[i] = '&apos;';
+            } else if (string[i] === '"') {
+                string[i] = '&quot;';
+            } else if (string[i] === '&') {
+                string[i] = '&amp;';
             }
         }
-        return array.join('');
+        return string.join('');
 }
 
 var wrapP = buildWrapper("P");
