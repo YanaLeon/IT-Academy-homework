@@ -3,7 +3,7 @@ function deepCopy (h1) {
     if(typeof h1 != 'object' || !h1){ // 0, NaN, null, undefined, '' - false
         return h1;
     }
-    if(h1 instanceof Array) {
+    if(Array.isArray(h1)) {
         h2 = [];
         for (let i =0; i < h1.length; i++){
             h2[i] = deepCopy(h1[i]);
