@@ -1,14 +1,12 @@
 function buildWrapper (teg){
     return function (text, obj) {
-        let style = '';
-        let resultStyle = '';
-        let result = '';
+        let resultStyle ='';
         for (let key in obj) {
-            style = changeItem(obj[key]);
+            let style = changeItem(obj[key]);
             resultStyle += ' ' + key + '=' + "'" + style + "'";
         }
         text = changeItem(text);
-        result = `<${teg}${resultStyle}>${text}</${teg}>`;
+        let result = `<${teg}${resultStyle}>${text}</${teg}>`;
         return result;
     }
 }
