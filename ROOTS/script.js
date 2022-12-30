@@ -2,14 +2,11 @@ function squareRoots(a,b,c) {
     const d=b*b-4*a*c; // дискриминант
     if(a===0 && b===0 && c === 0) {
         throw new Error ('Error');
-    }
-    if(a===0 && c===0) {
+    } else if(a===0 && c===0) {
         return [0];
-    }
-    if(a===0 && b===0) {
+    } else if(a===0 && b===0) {
         return [];
-    }
-    if(a === 0) {
+    } else if(a === 0) {
         return [ -c/b ];
     }
     if ( d<0 )

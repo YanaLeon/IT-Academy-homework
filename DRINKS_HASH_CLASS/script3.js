@@ -1,19 +1,21 @@
 function deepCopy (h1) {
     let h2;
-    if(h1 instanceof Array) {
-        h2 = [];
-    } else {
-        h2 = {};
-    }
     if(typeof h1 != 'object' || !h1){ // 0, NaN, null, undefined, '' - false
         return h1;
     }
-    for (let key in h1){
-        h2[key] = deepCopy(h1[key]);
+    if(h1 instanceof Array) {
+        h2 = [];
+        for (let i =0; i < h1.length; i++){
+            h2[i] = deepCopy(h1[i]);
+        }
+    } else {
+        h2 = {};
+        for (let key in h1){
+            h2[key] = deepCopy(h1[key]);
+        }
     }
     return h2;
 }
-
 function test () {
     {
         let h1 = { a:5, b:{b1:6,b2:7}, c:[33,22], d:null, e:undefined, f:Number.NaN };
