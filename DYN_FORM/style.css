@@ -1,0 +1,20 @@
+input, select {
+   margin: 10px;
+}
+input[type = 'text'] {
+    width: 80%;
+}
+textarea {
+    width: 80%;
+}
+label {
+    display: block;
+}
+input[type = 'submit'] {
+    margin-left: 0px;
+}
+
+form {
+    border: 2px solid gray;
+    padding: 10px;
+}
