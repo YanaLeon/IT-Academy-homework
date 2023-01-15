@@ -16,19 +16,20 @@ function deepComp (a, b) {
   if (a === b || (Number.isNaN(a) && Number.isNaN(b))) {
     return true;
   }
-  if ((a instanceof Object && b instanceof Array) || (a instanceof Array && b instanceof Object) || a === null || b === null || typeof a !== 'object' || typeof b !== 'object') {
+  if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') {
     return false;
   }
   if(Array.isArray(a) && Array.isArray(b)){
-    for(let i = 0; i < a.length; i++){
-      if(b.indexOf(a[i]) > 0){
-        let item = b.indexOf(a[i]);
-        b.splice(item, 1);
-      } else {
+    if(a.length != b.length){
+      return false;
+    }
+    for (let i = 0; i < a.length; i++){
+      if(a[i] != b[i]) {
         return false;
       }
     }
-  } else {
+    return true;
+  } else if (!(Array.isArray(a)) && !(Array.isArray(b))) {
     let keysA = Object.keys(a);
     let keysB = Object.keys(b);
     if (keysA.length != keysB.length) {
@@ -41,6 +42,8 @@ function deepComp (a, b) {
         }
       }
     }
+  } else {
+    return false;
   }
   return true;
 }
@@ -184,6 +187,13 @@ function testDeepComp () {
       console.log('Тест 20 для сранения Number.NaN,Number.NaN -> пройден');
     } else {
       console.log('Тест 20 для сранения Number.NaN,Number.NaN -> не пройден');
+    }
+  }
+  {
+    if (deepComp([5],[5]) === true) {
+      console.log('Тест 21 для сранения [5],[5] -> пройден');
+    } else {
+      console.log('Тест 21 для сранения [5],[5] -> не пройден');
     }
   }
 }
