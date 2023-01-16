@@ -24,7 +24,7 @@ function deepComp (a, b) {
       return false;
     }
     for (let i = 0; i < a.length; i++){
-      if(a[i] !== b[i]) {
+      if(a[i] !== b[i] && !deepComp(a[i], b[i])) {
         return false;
       }
     }
@@ -201,6 +201,13 @@ function testDeepComp () {
       console.log('Тест 22 для сранения [5], ["5"] -> пройден');
     } else {
       console.log('Тест 22 для сранения [5], ["5"] -> не пройден');
+    }
+  }
+  {
+    if (deepComp( [ {a:5} ], [ {a:5} ] ) === true) {
+      console.log('Тест 23 для сранения [ {a:5} ], [ {a:5} ] -> пройден');
+    } else {
+      console.log('Тест 23 для сранения [ {a:5} ], [ {a:5} ] -> не пройден');
     }
   }
 }
