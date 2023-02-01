@@ -16,16 +16,15 @@ function getImages () {
     }
     function imgMouseDown(eo) {
         eo = eo || window.event;
+        eo.target.style.zIndex = ++countzIndex;
+        eo.target.style.cursor = 'grab';
         let mouseOnImageX = eo.offsetX; // eo.pageX - eo.target.getBoundingClientRect().left;
         let mouseOnImageY = eo.offsetY; // eo.pageY - eo.target.getBoundingClientRect().top;
         console.log('нажат');
-        moveImage(eo.pageX, eo.pageY);
         function moveImage (pageX, pageY) {
             eo = eo || window.event;
             eo.target.style.left = pageX - mouseOnImageX + 'px';
             eo.target.style.top = pageY - mouseOnImageY + 'px';
-            eo.target.style.zIndex = countzIndex++;
-            eo.target.style.cursor = 'grab';
         }
         document.body.addEventListener('mousemove', imageMove);
         function imageMove (eo) {
@@ -33,8 +32,9 @@ function getImages () {
             moveImage(eo.pageX, eo.pageY)
         }
         eo.target.addEventListener('mouseup', imageMouseUp);
-        function imageMouseUp () {
+        function imageMouseUp (eo) {
             document.body.removeEventListener('mousemove', imageMove);
+            eo.target.removeEventListener('mouseup', imageMouseUp);
             console.log('отпущен');
         }
     }
