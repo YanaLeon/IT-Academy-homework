@@ -1,0 +1,22 @@
+input, select {
+    margin: 10px;
+ }
+ input[type = 'text'] {
+     width: 40%;
+ }
+ textarea {
+     width: 40%;
+ }
+ label {
+     display: block;
+ }
+ input[type = 'submit'] {
+     margin-left: 0px;
+ }
+ div {
+    display: inline-block;
+    width: 40%;
+    background-color: rgba(255,0,0,0.2);
+    color: red;
+    text-align: center;
+ }
