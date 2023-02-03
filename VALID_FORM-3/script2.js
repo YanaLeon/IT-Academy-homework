@@ -1,10 +1,3 @@
-let devField = formFirst.elements.devname;
-let siteField = formFirst.elements.sitename;
-let urlField = formFirst.elements.siteurl;
-let divisionField = formFirst.elements.division;
-let paymentField = formFirst.elements.payment;
-let descriptionField = formFirst.elements.description;
-
 let formValidDef = [
   {fieldName: 'devname', validFunction: validateDev, event: 'blur'},
   {fieldName: 'sitename', validFunction: validateSite, event: 'blur'},
@@ -15,56 +8,20 @@ let formValidDef = [
   {fieldName: 'first', event: 'submit'}
 ]
   for (let i = 0; i < formValidDef.length; i++) {
-    if(formValidDef[i].fieldName === 'devname') {
-      devField.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (devField)})
-    }
-    if(formValidDef[i].fieldName === 'sitename') {
-      siteField.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (siteField)})
-    }
-    if(formValidDef[i].fieldName === 'siteurl') {
-      urlField.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (urlField)})
-    }
-    if(formValidDef[i].fieldName === 'division') {
-      divisionField.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (divisionField)})
-    }
-    if(formValidDef[i].fieldName === 'description') {
-      descriptionField.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (descriptionField)})
-    }
-    if(formValidDef[i].fieldName === 'first') {
+    if (formValidDef[i].fieldName !== 'payment' && formValidDef[i].fieldName !== 'first') {
+      let field = formFirst.elements[formValidDef[i].fieldName];
+      field.addEventListener(formValidDef[i].event, function () {formValidDef[i].validFunction (field)})
+    } else if (formValidDef[i].fieldName === 'first') {
       formFirst.addEventListener(formValidDef[i].event, function (eo) {
         let count = 0;
-        for (let y = formValidDef.length - 1; y >= 0; y--) {
-          if (formValidDef[y].validFunction === validateDev) {
-            count+= validateDev(devField);
-            if (validateDev(devField)) {
-              devField.focus();
-            }
-          } else if (formValidDef[y].validFunction === validateSite) {
-            count+= validateSite(siteField);
-            if (validateSite(siteField)) {
-              siteField.focus();
-            }
-          } else if (formValidDef[y].validFunction === validateURL) {
-            count+= validateURL(urlField);
-            if (validateURL(urlField)) {
-              urlField.focus();
-            }
-          } else if (formValidDef[y].validFunction === validateDivision) {
-            count+= validateDivision(divisionField);
-            if (validateDivision(divisionField)) {
-              divisionField.focus();
-            }
-          } else if (formValidDef[y].validFunction === validatePayment) {
-            count+= validatePayment(paymentField);
-            if (validatePayment(paymentField)) {
-              let element = document.querySelector('#radio1');
-              element.scrollIntoView();;
-            }
-          } else if (formValidDef[y].validFunction === validateDescription) {
-            count+= validateDescription(descriptionField);
-            if (validateDescription(descriptionField)) {
-              descriptionField.focus();
-            }
+        for (let y = formValidDef.length - 2; y >= 0; y--) {
+          let field = formFirst.elements[formValidDef[y].fieldName];
+          count+= formValidDef[y].validFunction (field);
+          if (formValidDef[y].fieldName !== 'payment' && formValidDef[y].validFunction(field)) {
+            field.focus();
+          } else if (formValidDef[y].fieldName === 'payment' && formValidDef[y].validFunction(field)) {
+            let element = document.querySelector('#radio1');
+            element.scrollIntoView();
           }
         }
         if (count > 0) {
@@ -73,6 +30,7 @@ let formValidDef = [
       })
     }
   }
+
 function validateDev (nameField) {
   let value = nameField.value.trim();
   let countError = 0;
