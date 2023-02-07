@@ -88,11 +88,9 @@ function createClock () {
         if (lag > 0) {
             clearTimeout(timer2);
             timer = setTimeout(getTime, (1000 - lag));
-            console.log(1000 - lag, lag, time-timeStart)
         } else {
             clearTimeout(timer);
             timer2 = setTimeout(getTime, 1000);
-            console.log(lag, time-timeStart, sec)
         }
         let formatTime = formatDateTime(time);
         dialTime.textContent = formatTime;
