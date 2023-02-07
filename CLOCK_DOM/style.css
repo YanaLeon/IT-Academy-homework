@@ -40,19 +40,3 @@
     z-index: 1;
     border-radius: 30%;
 }
-.GREEN {
-    border-radius: 50%;
-    width: 80px; 
-    height: 80px;
-    background-color: green; 
-    
-}
-.RED {
-    position: absolute; 
-    width: 800px; 
-    height: 800px;
-    left: 150px; 
-    top: 400px; 
-    background-color: red;
-    border-radius: 50%
-}
