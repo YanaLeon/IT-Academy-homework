@@ -76,6 +76,8 @@ function createClock () {
     let timeStart = new Date ();
     let lag = 0; // здесь храним разницу между временем запуска функции и реальным временем
     let sec = 0; // здесь будем хранить значение 1000 - 1 секунда для расчётов
+    let timer;
+    let timer2;
     function getTime () {
         let time = new Date();
         let difference = (time-timeStart);
@@ -84,10 +86,13 @@ function createClock () {
             lag = difference - sec;
         }
         if (lag > 0) {
-            setTimeout(getTime, (1000 - lag));
-            console.log(1000 - lag)
+            clearTimeout(timer2);
+            timer = setTimeout(getTime, (1000 - lag));
+            console.log(1000 - lag, lag, time-timeStart)
         } else {
-            setTimeout(getTime, 1000);
+            clearTimeout(timer);
+            timer2 = setTimeout(getTime, 1000);
+            console.log(lag, time-timeStart, sec)
         }
         let formatTime = formatDateTime(time);
         dialTime.textContent = formatTime;
@@ -100,7 +105,6 @@ function createClock () {
         console.log(hourNow, minuteNow, secondNow);
     }
     getTime ()
-    setTimeout(getTime, 1000)
 }
 function formatDateTime(dt) {
     const hours=dt.getHours();
