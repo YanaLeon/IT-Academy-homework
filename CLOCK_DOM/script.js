@@ -73,25 +73,18 @@ function createClock () {
     }
     let deg = 6; // 360/60 = 6 за 60 секунд стрелка поворачивается на 360, за 1 с - на 6, за 60 минут стрелка поворачивается на 360, за 1 м - на 6
     let degHour = 30; // 360/12 = 30, за 1 час часовая стрелка поворачивается на 30 градусов
-    let timeStart = new Date ();
-    let lag = 0; // здесь храним разницу между временем запуска функции и реальным временем
-    let sec = 0; // здесь будем хранить значение 1000 - 1 секунда для расчётов
     function getTime () {
         let time = new Date();
-        let difference = (time-timeStart);
-        if (difference > 1000) {
-            sec += 1000;
-            lag = difference - sec;
-        }
-        setTimeout(getTime, (1000 - lag));
         let formatTime = formatDateTime(time);
         dialTime.textContent = formatTime;
         let hourNow = time.getHours();
         let minuteNow = time.getMinutes() ;
         let secondNow = time.getSeconds();
+        let milisecondNow = time.getMilliseconds();
         second.style.transform = `rotate(${deg * secondNow}deg)`
         minute.style.transform = `rotate(${deg*(minuteNow + (secondNow/60))}deg)`
         hour.style.transform = `rotate(${degHour * (hourNow + (minuteNow/60))}deg)`
+        setTimeout(getTime, (1000 - milisecondNow));
         console.log(hourNow, minuteNow, secondNow);
     }
     getTime ()
