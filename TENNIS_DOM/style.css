@@ -10,8 +10,7 @@ body {
     font: 50px Roboto, serif;
 }
 .field {
-    width: 450px;
-    height: 400px;
+    
     background-color: rgb(239, 222, 38);
     display: flex;
     justify-content: space-between;
