@@ -1,0 +1,43 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.head {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font: 50px Roboto, serif;
+}
+.field {
+    width: 450px;
+    height: 400px;
+    background-color: rgb(239, 222, 38);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.field-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.racket-left {
+    width: 15px;
+    height: 100px;
+    background-color: rgb(39, 123, 39);
+    position: absolute;
+}
+.recket-rigth {
+    width: 15px;
+    height: 100px;
+    background-color: rgb(29, 29, 159);
+    position: absolute;
+}
+.ball {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+}
