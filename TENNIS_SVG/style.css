@@ -1,0 +1,18 @@
+.head {
+    display: flex;
+    align-items: center;
+    font: 50px Roboto, serif;
+}
+.racket {
+    position: absolute;
+    height: 100px;
+}
+.field-container {
+    position: relative;
+    width: 450px;
+    height: 400px;
+    position: relative;
+}
+.score {
+    margin-left: 50px;
+}
