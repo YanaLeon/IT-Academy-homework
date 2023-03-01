@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Test-game</title>
+</head>
+<body>
+    <div class="container-tatile">
+        <p class="title-text-game">Puzzel</p>
+        <p class="title-text-name">Чистое искусство</p>
+        <p class="title-text-discription">Погрузитесь в мир искусства через игру. Листайте и выбирайте картину, из которой хотите сложить пазл. Как только найдёте - жмите "Начать игру".</p>
+    </div>
+    <div class="main">
+        <div class="container-gallery">
+            <div class="arrow">
+                <div class="left transform-arrow disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="96px" height="96px" class="left">
+                        <path class="left" style="fill:white" d="M12,52h62.344L53.172,73.172c-1.562,1.562-1.562,4.094,0,5.656c1.562,1.562,4.095,1.562,5.657,0l28-28    c1.562-1.562,1.562-4.095,0-5.656l-28-28C58.048,16.391,57.024,16,56,16c-1.023,0-2.047,0.391-2.828,1.172    c-1.562,1.562-1.562,4.095,0,5.656L74.344,44H12c-2.209,0-4,1.791-4,4S9.791,52,12,52z"/>
+                    </svg>
+                </div>
+                <div class="right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="96px" height="96px" class="right">
+                        <path class="right" style="fill:white" d="M12,52h62.344L53.172,73.172c-1.562,1.562-1.562,4.094,0,5.656c1.562,1.562,4.095,1.562,5.657,0l28-28    c1.562-1.562,1.562-4.095,0-5.656l-28-28C58.048,16.391,57.024,16,56,16c-1.023,0-2.047,0.391-2.828,1.172    c-1.562,1.562-1.562,4.095,0,5.656L74.344,44H12c-2.209,0-4,1.791-4,4S9.791,52,12,52z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="slider-list">
+                <div class="container-picture">
+                    <div class="picture-content">
+                        <div class="picture-image">
+                            <img src="image/Van-Gog.jpg" alt="Картина Звездная ночь" class="picture">
+                        </div>
+                        <div class="picture-discription">
+                            <p class="picture-discription-text">"Звездная ночь" Ван Гог.<br>
+                            Ван Гог написал "Звездную ночь" в 1889-ом, залечивая "душевные раны" после
+                            известного конфликта с Полем Гогеном в клинике для душевнобольных.
+                            Интресно, что пейзаж на картине воображаемый, а не реальный.</p>
+                        </div>
+                    </div>
+                    <div class="picture-content">
+                        <div class="picture-image">
+                            <img src="image/Matiss.jpg" alt="Картина Звездная ночь" class="picture">
+                        </div>
+                        <div class="picture-discription">
+                            <p class="picture-discription-text">"Танец" Анри Матисс.<br>
+                            При написании картины художник вдохновлялся русскими сезонами популярного на тот
+                            момент Сергея Дягилева, раскрепощенными танцами Айседоры Дункан,
+                            греческой вазовой живописью.</p>
+                        </div>
+                    </div>
+                    <div class="picture-content">
+                        <div class="picture-image">
+                            <img src="image/Dega.jpg" alt="Картина Звездная ночь" class="picture">
+                        </div>
+                        <div class="picture-discription">
+                            <p class="picture-discription-text">"Голубые танцовщицы" Эдгар Дега.<br>
+                            Ощущуние, что на картине танцуют четыре балерины? Но это не так.
+                            На картине изображена одна и та же девушка, в разные моменты.
+                            Вот она наклонилась к пуантам, а вот поправляют лямки, ещё чуть позже она держится за декорации.
+                            Её движения так грациозны, что создаётся иллюзия танца.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-container hide">
+                <div class="modal-window">
+                    <p class="modal-choose-text">Выберете размер пазла</p>
+                    <div class="choose">
+                        <span>4x4</span>
+                        <input type="radio" class="choose-size" value="4" name="size" id="size-4" checked>
+                        <label for="size-4" class="choose-size-name"></label>
+                    </div>
+                    <div class="choose">
+                        <span>5x5</span>
+                        <input type="radio" class="choose-size" value="5" name="size" id="size-5">
+                        <label for="size-5" class="choose-size-name"></label>
+                    </div>
+                    <div class="wrapper-button-choose">
+                        <button class="button-choose">Выбор сделан</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-navigation">
+            <div class="player">
+                <button class="play-prev-button player-icon"></button>
+                <button class="play-button player-icon"></button>
+                <button class="play-next-button player-icon"></button>
+            </div>
+            <p class="text-music"></p>
+            <div class="container-button">
+                <div class="wrapper-button">
+                    <button class="start-game-button">Начать игру</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script-slider.js"></script>
+    <script src="script.js"></script>
+    <script src="script-model.js"></script>
+    <script src="script-view.js"></script>
+    <script src="script-controller.js"></script>
+</body>
+</html>
