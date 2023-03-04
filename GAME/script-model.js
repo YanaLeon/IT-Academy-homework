@@ -1,34 +1,31 @@
+"use strict";
 // создаём класс для игры
-function Game (sizeChecked, imageSrc, imageWidth, imageHeigth, view) {
+function Game (sizeChecked, imageWidth, imageHeigth) {
     let self = this;
+    self.sizeChecked = Number(sizeChecked);
     self.size = sizeChecked * sizeChecked;
-    self.src = imageSrc;
     self.width = imageWidth;
     self.heigth = imageHeigth;
     self.matrix = [];
-    self.itemNodeList;
-
+    self.moveCount = 0;
+    self.check = 0;
 }
 Game.prototype.start = function (view) {
     let self = this;
-    self.createElem();
-    self.getMatrix();
     self.myView = view;
     if (self.myView) {
         self.myView.setStyleBackground();
     }
-    self.shuffle();
-    self.shuffleTimer();
 }
 Game.prototype.updateView = function (time) {
     let self = this;
-    console.log(self.myView)
     if (self.myView) {
         self.myView.setStyleTransform(time);
     }
 }
-Game.prototype.createElem = function () {
+Game.prototype.createElem = function (src) {
     let self = this;
+    self.src = src;
     console.log(self)
     let field = document.createElement('div');
     field.classList.add('container-game');
@@ -37,28 +34,29 @@ Game.prototype.createElem = function () {
     galleryContainer.appendChild(field);
     self.field = field;
     for (let i = 0; i < self.size; i++) {
-        item = document.createElement('button');
+        let item = document.createElement('button');
         item.setAttribute('data-number', `${i + 1}`);
-        item.style.backgroundImage = `url(${imageSrc})`;
+        item.style.backgroundImage = `url(${self.src})`;
         item.style.backgroundSize = `${self.width}px ${self.heigth}px`;
         item.textContent = `${i + 1}`;
         item.classList.add('item');
-        if (sizeChecked == 4) {
+        if (self.sizeChecked == 4) {
             item.classList.add('item-four');
-        } else if (sizeChecked == 5) {
+        } else if (self.sizeChecked == 5) {
             item.classList.add('item-five');
         }
         field.appendChild(item);
     }
+    self.itemNodeList = Array.from(document.querySelectorAll('.item'));
+    self.dataNumber = self.itemNodeList.map((item) => Number(item.dataset.number));
 }
 Game.prototype.getMatrix = function () {
     let self = this;
-    self.itemNodeList = Array.from(document.querySelectorAll('.item'));
-    self.dataNumber = self.itemNodeList.map((item) => Number(item.dataset.number));
     let arrayX = [];
     let x = 0;
+    console.log(self.itemNodeList)
     for (let i = 0; i <= self.itemNodeList.length; i++) {
-        if (x >= sizeChecked) {
+        if (x >= self.sizeChecked) {
             x = 0;
             self.matrix.push(arrayX);
             arrayX = [];
@@ -106,11 +104,14 @@ Game.prototype.move = function (element) { // controller
     if (isChangePosition) {
         self.change(self.positionElement, self.positionLastElement, self.matrix);
         self.updateView(0.6);
-        self.checkWon();
+        self.moveCount++;
+        moveCount.textContent = self.moveCount;
+        if (self.checkWon()) {
+            self.myView.wonGameView();
+        }
     } else {
         self.vibro();
     }
-    console.log(element)
 }
 Game.prototype.moveArrow = function (positionElement, positionLast) { // controller
     let self = this;
@@ -120,7 +121,11 @@ Game.prototype.moveArrow = function (positionElement, positionLast) { // control
     };
     self.change(positionElement, positionLast, self.matrix);
     self.updateView(0.5);
-    self.checkWon();
+    self.moveCount++;
+    moveCount.textContent = self.moveCount;
+    if (self.checkWon()) {
+        self.myView.wonGameView()
+    }
 }
 Game.prototype.vibro = function () {
     if ( navigator.vibrate ) {
@@ -152,7 +157,6 @@ Game.prototype.checkTruePosition = function (position, matrix) {
             }
         }
     }
-    console.log(array)
     return array;
 }
 let count = 250;
@@ -169,14 +173,12 @@ Game.prototype.shuffleTimer = function () {
     timer = setInterval(shuffleCheck, 4);
     function shuffleCheck () {
         count--;
-        console.log( 'счёт: ' + count);
         self.shuffle();
         self.updateView(0.1);
         self.field.style.pointerEvents = 'none';
         document.body.style.opacity = '0.5';
         buttonReturn.disabled = true;
         buttonStartAgain.disabled = true;
-        console.log(buttonReturn.disabled);
         if (!count) {
             clearInterval(timer);
             timer = 0;
@@ -189,7 +191,7 @@ Game.prototype.shuffleTimer = function () {
 }
 Game.prototype.delete = function () { // controller
     let self = this;
-    galleryContainer.removeChild(self.field)
+    galleryContainer.removeChild(self.field);
 }
 Game.prototype.checkWon = function () {
     let self = this;
@@ -203,7 +205,6 @@ Game.prototype.checkWon = function () {
     console.log(true);
     return true;
 }
-
 Game.prototype.createTime = function (time) {
     let minute = Math.floor(time / 60);
     let second = time % 60;
@@ -223,10 +224,4 @@ Game.prototype.setTime = function () {
     self.timerTime = setTimeout(() => {
         self.setTime();
     }, 1000);
-}
-Game.prototype.getData = function () {
-    let self = this;
-    // lsDataGame = JSON.parse(JSON.stringify(self.matrix));
-    // console.log(lsDataGame)
-    return self.matrix;
 }

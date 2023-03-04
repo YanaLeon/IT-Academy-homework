@@ -12,6 +12,7 @@ html {
     max-width: 1600px;
     min-width: 300px;
     user-select: none;
+    overflow: auto;
 }
 .container-tatile {
     padding: 0.5rem;
@@ -97,7 +98,7 @@ html {
     flex-direction: column;
 }
 .wrapper-button {
-    width: 80%;
+    width: 70%;
     height: 60px;
     background-color: white;
     box-shadow: 2px 2px 3px 3px rgb(151, 150, 150);
@@ -163,6 +164,14 @@ html {
     font-family: 'Lobster', cursive;
     color: white;
 }
+.wrapper-move {
+    text-align: center;
+    margin: 15px;
+}
+.move-text, .move-number {
+    font-family: 'Lobster', cursive;
+    color: white;
+}
 @media (max-width: 1600px) {
     .container-gallery {
         max-width: 900px;
@@ -172,7 +181,7 @@ html {
     .container-navigation {
         width: 350px;
     }
-    .start-game-button, .text-music {
+    .start-game-button, .text-music, .move-text, .move-number {
         font-size: 1.2rem;
     }
 }
@@ -181,7 +190,7 @@ html {
         max-width: 600px;
         flex-basis: 600px;
     }
-    .start-game-button, .text-music {
+    .start-game-button, .text-music, .move-text, .move-number {
         font-size: 1rem;
     }
 }
@@ -197,12 +206,12 @@ html {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-    .container-navigation {
-        width: 200px;
-    }
     .container-button-footer {
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+    .container-button {
+        flex-direction: row;
     }
 }
 @media (max-width: 420px) {
@@ -210,11 +219,14 @@ html {
         max-width: 200px;
         flex-basis: 200px;
     }
-    .start-game-button, .text-music {
+    .start-game-button, .text-music, .move-text, .move-number {
         font-size: 0.5rem;
     }
     .title-text-discription {
         font-size: 0.5rem;
+    }
+    .container-navigation {
+        width: 200px;
     }
     .wrapper-button {
         height: 30px;
@@ -312,8 +324,9 @@ html {
     width: 100%;
     height: 100%;
     background-color: rgb(2, 39, 72, 0.9);
+    z-index: 2;
 }
-.modal-window {
+.modal-window, .modal-window-won {
     padding: 0 20px 20px 20px;
     background-color: white;
     position: fixed;
@@ -329,7 +342,7 @@ html {
     font-family: 'Lobster', cursive;
     color: rgb(2, 39, 72);
 }
-.wrapper-button-choose {
+.wrapper-button-choose, .wrapper-button-won-ready {
     width: 80%;
     height: 40px;
     background-color: white;
@@ -338,8 +351,9 @@ html {
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    margin: 15px;
 }
-.button-choose {
+.button-choose, .modal-won-text, .button-won {
     font-family: 'Lobster', cursive;
     background-color: white;
     color: rgb(2, 39, 72);
@@ -349,19 +363,19 @@ html {
     align-items: center;
     padding: 10px;
 }
-label {
+.choose-size-name {
     border-radius: 15px;
     display: inline-block;
     width: 25px;
     height: 25px;
     background-color: lightgrey;
 }
-input {
+input.choose-size {
     display: none;
     width: 25px;
     height: 25px;
 }
-input:checked + label{
+input.choose-size:checked + label.choose-size-name{
     background-color: rgb(2, 39, 72);
 }
 @keyframes MyAnimation1
@@ -377,13 +391,13 @@ input:checked + label{
     display: none;
 }
 @media (max-width: 1600px) {
-    .modal-window {
+    .modal-window, .modal-window-won {
         width: 900px;
     }
     .modal-choose-text {
         font-size: 2rem;
     }
-    span, .button-choose {
+    span, .button-choose, .modal-won-text, .button-won, .won-table {
         font-size: 1.5rem;
     }
     span {
@@ -391,35 +405,36 @@ input:checked + label{
     }
 }
 @media (max-width: 1000px) {
-    .modal-window {
+    .modal-window, .modal-window-won {
         width: 600px;
     }
     .modal-choose-text {
         font-size: 1.7rem;
     }
-    span, .button-choose {
+    span, .button-choose, .modal-won-text, .button-won, .won-table {
         font-size: 1.2rem;
     }
 }
 @media (max-width: 640px) {
-    .modal-window {
+    .modal-window, .modal-window-won {
         width: 400px;
     }
     .modal-choose-text {
         font-size: 1.5rem;
     }
-    span, .button-choose {
+    span, .button-choose, .modal-won-text, .button-won, .won-table {
         font-size: 1rem;
     }
 }
 @media (max-width: 420px) {
-    .modal-window {
+    .modal-window, .modal-window-won
+     {
         width: 200px;
     }
     .modal-choose-text {
         font-size: 1.2rem;
     }
-    span, .button-choose {
+    span, .button-choose, .modal-won-text, .button-won, .won-table {
         font-size: 0.8rem;
     }
 }
@@ -488,4 +503,59 @@ input:checked + label{
     color: white;
     margin-bottom: 15px;
     text-align: center;
+}
+.container-won-table {
+    padding: 10px 10px 20px 20px;
+    background-color: white;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 15px;
+    height: 300px;
+}
+.won-table {
+    margin: 5%;
+    font-family: 'Lobster', cursive;
+    color: rgb(2, 39, 72);
+}
+.won-close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.container-close {
+    padding: 10px 10px;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 6px auto;
+    background-color: rgb(2, 39, 72);
+}
+.container-close .bar:nth-child(1) {
+    transform: translateY(2px) rotate(45deg);
+}
+.container-close .bar:nth-child(2) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+@media (max-width: 1600px) {
+    .container-won-table {
+        width: 500px;
+    }
+}
+@media (max-width: 1000px) {
+    .container-won-table {
+        width: 400px;
+    }
+}
+@media (max-width: 640px) {
+    .container-won-table {
+        width: 300px;
+    }
+}
+@media (max-width: 420px) {
+    .container-won-table {
+        width: 150px;
+    }
 }
