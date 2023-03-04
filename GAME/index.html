@@ -86,6 +86,17 @@
                         <button class="button-choose">Выбор сделан</button>
                     </div>
                 </div>
+                <div class="modal-window-won hide">
+                    <p class="modal-won-text">Поздравляем, вы собрали пазл! Если хотите добавить своей результат в таблицу рекородов - укажите ваше имя:</p>
+                    <div class="won">
+                        <label for="won" class="won-label">Имя:</label>
+                        <input type='text' class="won-input" name="won" id="won">
+                        <span class="null"></span>
+                    </div>
+                    <div class="wrapper-button-won-ready">
+                        <button class="button-won">Готово!</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container-navigation">
@@ -99,13 +110,30 @@
                 <div class="wrapper-button">
                     <button class="start-game-button">Начать игру</button>
                 </div>
+                <div class="wrapper-move hide">
+                    <p class="move-text">Количество шагов:</p>
+                    <p class="move-number"></p>
+                </div>
             </div>
         </div>
     </div>
+    <div class="container-won-table hide">
+        <div class="won-close">
+            <div class="container-close">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="won-table">
+            
+        </div>
+    </div>
     <script src="script-slider.js"></script>
+    <script src="script-audio.js"></script>
     <script src="script.js"></script>
     <script src="script-model.js"></script>
     <script src="script-view.js"></script>
     <script src="script-controller.js"></script>
+    <script src="script-save-score-ajax.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+"use strict";
 function ControllerGame (model) {
     let self = this;
     self.myModel = model;
@@ -5,6 +6,7 @@ function ControllerGame (model) {
 }
 ControllerGame.prototype.moveNodeClick = function () {
     let self = this;
+    console.log(1)
     self.myModel.element;
     self.myModel.field.addEventListener('click', eventForElementClick);
     function eventForElementClick (ev) {
@@ -31,14 +33,15 @@ ControllerGame.prototype.moveNodeArrow = function () {
     document.body.addEventListener('keydown', eventForElementArrow);
     function eventForElementArrow (ev) {
         ev = ev || window.event;
-        ev.preventDefault();
-        console.log(ev.key);
-        self.myModel.lastElement = self.myModel.itemNodeList.length;
-        self.myModel.positionLastElement = self.myModel.getPosition(self.myModel.lastElement);
-        self.myModel.positionElement = {
-            x: self.myModel.positionLastElement.x,
-            y: self.myModel.positionLastElement.y
-        };
+        console.log(ev);
+        if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp' || ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
+            ev.preventDefault();
+            self.myModel.lastElement = self.myModel.itemNodeList.length;
+            self.myModel.positionLastElement = self.myModel.getPosition(self.myModel.lastElement);
+            self.myModel.positionElement = {
+                x: self.myModel.positionLastElement.x,
+                y: self.myModel.positionLastElement.y
+            };
         if (ev.key === 'ArrowDown') {
             self.myModel.positionLastElement.x += 1;
         };
@@ -51,6 +54,8 @@ ControllerGame.prototype.moveNodeArrow = function () {
         if (ev.key === 'ArrowRight') {
             self.myModel.positionLastElement.y += 1;
         };
-        self.myModel.moveArrow(self.myModel.positionElement, self.myModel.positionLastElement)
+        self.myModel.moveArrow(self.myModel.positionElement, self.myModel.positionLastElement);
+        document.body.removeEventListener('keyup', eventForElementArrow);
+        }
     }
 }

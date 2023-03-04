@@ -1,3 +1,4 @@
+"use strict";
 let sliderList = document.querySelector('.slider-list');
 let containerPicture = document.querySelector('.container-picture');
 let slides = containerPicture.querySelectorAll('.picture-content');
