@@ -254,9 +254,6 @@ html {
 .picture-discription-text {
     color: rgb(2, 39, 72);
 }
-.slider-list {
-    border: 1px red solid;
-}
 .container-picture {
     display: flex;
     transform: translate3d(0px, 0px, 0px);

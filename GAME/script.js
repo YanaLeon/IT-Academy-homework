@@ -123,8 +123,7 @@ function getPuzzel () {
     controllerGame.moveNodeClick();
     controllerGame.moveNodeTouch();
     controllerGame.moveNodeArrow();
-    game.shuffle();
-    // game.shuffleTimer();
+    game.shuffleTimer();
     matrxixPage = game.matrix;
     srcPage = game.src;
     sizePage = game.sizeChecked;
