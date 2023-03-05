@@ -8,7 +8,7 @@ function Game (sizeChecked, imageWidth, imageHeigth) {
     self.heigth = imageHeigth;
     self.matrix = [];
     self.moveCount = 0;
-    self.check = 0;
+    // self.check = 0;
 }
 Game.prototype.start = function (view) {
     let self = this;
@@ -26,7 +26,6 @@ Game.prototype.updateView = function (time) {
 Game.prototype.createElem = function (src) {
     let self = this;
     self.src = src;
-    console.log(self)
     let field = document.createElement('div');
     field.classList.add('container-game');
     field.style.width = `${self.width}px`;
@@ -92,7 +91,7 @@ Game.prototype.change = function (position, positionLast, matrix) {
     matrix[positionLast.x][positionLast.y] = matrix[position.x][position.y];
     matrix[position.x][position.y] = positionChange;
 }
-Game.prototype.move = function (element) { // controller
+Game.prototype.move = function (element) {
     let self = this;
     self.lastElement = self.itemNodeList.length;
     self.positionElement;
@@ -113,7 +112,7 @@ Game.prototype.move = function (element) { // controller
         self.vibro();
     }
 }
-Game.prototype.moveArrow = function (positionElement, positionLast) { // controller
+Game.prototype.moveArrow = function (positionElement, positionLast) {
     let self = this;
     if (positionLast.y >= self.matrix.length || positionLast.y < 0 ||
         positionLast.x >= self.matrix.length || positionLast.x < 0) {
@@ -137,7 +136,6 @@ Game.prototype.shuffle = function () {
     self.lastElement = self.itemNodeList.length;
     self.positionLastElement = self.getPosition(self.lastElement);
     self.truePositionElement = self.checkTruePosition (self.positionLastElement, self.matrix);
-    // console.log(self.positionLastElement, self.matrix, self.truePositionElement);
     function randomDiap(n,m) {
         return Math.floor(Math.random()*(m-n+1))+n;
     }
@@ -198,30 +196,8 @@ Game.prototype.checkWon = function () {
     self.matrxFlat = self.matrix.flat();
     for (let i = 0; i < self.matrxFlat.length; i++) {
         if (self.matrxFlat[i] !== self.dataNumber[i]) {
-            console.log(false)
             return false;
         }
     }
-    console.log(true);
     return true;
-}
-Game.prototype.createTime = function (time) {
-    let minute = Math.floor(time / 60);
-    let second = time % 60;
-    if (second < 10){
-        second = `0${second}`;
-    } else if (minute < 10){
-        minute = `0${minute}`
-    }
-    let timeForGame = `${minute}:${second}`
-    return timeForGame;
-}
-Game.prototype.setTime = function () {
-    let self = this;
-    self.counter++;
-    time.innerHTML = self.createTime (self.counter);
-    self.timerTime;
-    self.timerTime = setTimeout(() => {
-        self.setTime();
-    }, 1000);
 }
