@@ -130,7 +130,7 @@ buttonWon.addEventListener('click', function () {
         modalWindow.classList.remove('show');
         modalChoose.classList.remove('hide');
         modalWon.classList.add('hide');
-        // game.shuffleTimer();
+        game.shuffleTimer();
         game.moveCount = 0;
         moveCount.textContent = game.moveCount;
         inputWon.value = '';
@@ -291,7 +291,6 @@ function readReadySPA(callresult) {
     } else if ( callresult.result != "" ) {
         let page = JSON.parse(callresult.result);
         console.log(page);
-        // game.delete();
         game = new Game (page.size, page.width, page.heigth);
         let viewGame = new ViewGame (game);
         let controllerGame = new ControllerGame (game);
