@@ -41,10 +41,9 @@ function playAudio () {
 }
 playNext.addEventListener('click', palyNextAudio);
 function palyNextAudio () {
-    numberPlay = numberPlay >= playList.length - 1 ? 0 : ++numberPlay;
+    numberPlay = numberPlay === playList.length - 1 ? 0 : ++numberPlay;
     isPlay = false;
     playAudio();
-    console.log(1)
 }
 playPrev.addEventListener('click', playPrevAudio);
 function playPrevAudio () {

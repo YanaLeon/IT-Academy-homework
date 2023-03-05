@@ -542,6 +542,7 @@ input.choose-size:checked + label.choose-size-name{
 @media (max-width: 1600px) {
     .container-won-table {
         width: 500px;
+        height: 300px;
     }
 }
 @media (max-width: 1000px) {
@@ -552,10 +553,12 @@ input.choose-size:checked + label.choose-size-name{
 @media (max-width: 640px) {
     .container-won-table {
         width: 300px;
+        height: 250px;
     }
 }
 @media (max-width: 420px) {
     .container-won-table {
         width: 150px;
+        height: 200px;
     }
 }

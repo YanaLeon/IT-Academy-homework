@@ -76,7 +76,14 @@ buttonScoreButton.classList.add('start-game-button');
 buttonScoreButton.textContent = 'Лучшие результаты';
 buttonScore.appendChild(buttonScoreButton);
 let game; // переменная для объекта, глобальная чтобы удалить при возврате
-let stateGame = 1; // храним состояние игры для управления кнопками 1 - нет сохранённой игры, 2 - есть сохранённая игра
+let stateGame = 2; // храним состояние игры для управления кнопками 1 - есть сохранённая игра, 2 - нет сохранённой игры
+let stateGameSPA = 2; // 1 - игра идёт, 2 - игры нет
+let matrxixPage; // сохраняем для SPA
+let srcPage; // сохраняем для SPA
+let sizePage; // сохраняем для SPA
+let widthPage; // сохраняем для SPA
+let heigthPage; // сохраняем для SPA
+let moveCountPage;// сохраняем для SPA
 chooseSize.addEventListener('click', getPuzzel);
 function getPuzzel () {
     // удаляем элементы
@@ -94,7 +101,7 @@ function getPuzzel () {
     buttonScore.classList.remove('hide');
     divContainerButtonFooter.appendChild(buttonSave);
     divContainerButtonFooter.appendChild(buttonContinue);
-    if (stateGame === 2) {
+    if (stateGame === 1) {
         buttonSave.classList.add('hide');
         buttonContinue.classList.remove('hide');
     } else {
@@ -109,6 +116,7 @@ function getPuzzel () {
     let viewGame = new ViewGame (game);
     let controllerGame = new ControllerGame (game);
     game.createElem(imageSrc);
+    stateGameSPA = 1;
     game.getMatrix();
     game.start(viewGame);
     game.updateView();
@@ -117,6 +125,14 @@ function getPuzzel () {
     controllerGame.moveNodeArrow();
     game.shuffle();
     // game.shuffleTimer();
+    matrxixPage = game.matrix;
+    srcPage = game.src;
+    sizePage = game.sizeChecked;
+    widthPage = game.width;
+    heigthPage = game.heigth;
+    moveCountPage = game.moveCount;
+    storeInfoSPA();
+    switchToGamePage();
 }
 // действия при нажатии на кнопку новая игра
 buttonStartAgain.addEventListener('click', stratNewGame);
@@ -124,7 +140,6 @@ function stratNewGame () {
     game.shuffleTimer();
     game.moveCount = 0;
     moveCount.textContent = game.moveCount;
-    console.log(game.moveCount)
 }
 // кнопка для возврата
 let buttonReturn = document.createElement('button');
@@ -147,4 +162,13 @@ function returnMainPage () {
     buttonSave.classList.add('hide');
     buttonContinue.classList.add('hide');
     move.classList.add('hide');
+    switchToMainPage();
+}
+window.addEventListener('beforeunload', checkGame);
+function checkGame (ev) {
+    ev = ev || ev.window;
+    console.log(stateGameSPA)
+    if (stateGameSPA === 1) {
+        ev.returnValue = 'У вас есть несохранённые изменения'
+    }
 }

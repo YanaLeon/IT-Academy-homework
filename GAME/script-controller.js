@@ -2,11 +2,9 @@
 function ControllerGame (model) {
     let self = this;
     self.myModel = model;
-    console.log(self.myModel);
 }
 ControllerGame.prototype.moveNodeClick = function () {
     let self = this;
-    console.log(1)
     self.myModel.element;
     self.myModel.field.addEventListener('click', eventForElementClick);
     function eventForElementClick (ev) {

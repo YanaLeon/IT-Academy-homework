@@ -6,9 +6,9 @@ function ViewGame (model) {
 ViewGame.prototype.setStyleBackground = function () {
     let self = this;
     let backgroundPositionFourX = 33; // 100/3 = 33 позиция по x всегда начинается с 0, для следующих 3 клеток остаётся 100
-    let backgroundPositionFourY = 33; // 100/3 = 33 позиция по x всегда начинается с 0, для следующих 3 клеток остаётся 100
+    let backgroundPositionFourY = 33; // 100/3 = 33 позиция по y всегда начинается с 0, для следующих 3 клеток остаётся 100
     let backgroundPositionFiveX = 25; // 100/4 = 25 позиция по x всегда начинается с 0, для следующих 4 клеток остаётся 100
-    let backgroundPositionFiveY = 25; // 100/4 = 25 позиция по x всегда начинается с 0, для следующих 4 клеток остаётся 100
+    let backgroundPositionFiveY = 25; // 100/4 = 25 позиция по y всегда начинается с 0, для следующих 4 клеток остаётся 100
     let posY = 0;
     let posX = 0;
     for (let y = 0; y < self.myModel.matrix.length; y++) {
