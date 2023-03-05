@@ -37,7 +37,6 @@ Game.prototype.createElem = function (src) {
         item.setAttribute('data-number', `${i + 1}`);
         item.style.backgroundImage = `url(${self.src})`;
         item.style.backgroundSize = `${self.width}px ${self.heigth}px`;
-        item.textContent = `${i + 1}`;
         item.classList.add('item');
         if (self.sizeChecked == 4) {
             item.classList.add('item-four');
@@ -187,7 +186,7 @@ Game.prototype.shuffleTimer = function () {
         }
     }
 }
-Game.prototype.delete = function () { // controller
+Game.prototype.delete = function () {
     let self = this;
     galleryContainer.removeChild(self.field);
 }
