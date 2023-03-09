@@ -11,8 +11,6 @@ let modalChoose = document.querySelector('.modal-window');
 let imageContainer;
 let image;
 let imageSrc;
-let imageWidth;
-let imageHeigth;
 buttonStartGame.addEventListener('click', showWindow);
 function showWindow () {
     modalWindow.classList.remove('hide');
@@ -20,8 +18,6 @@ function showWindow () {
     imageContainer = document.querySelector('#show-image');
     image = imageContainer.querySelector('.picture');
     imageSrc = image.src;
-    imageWidth = image.offsetWidth;
-    imageHeigth = image.offsetHeight;
 }
 
 // получаем размер для пазла 4x4, 5x5
@@ -78,12 +74,6 @@ buttonScore.appendChild(buttonScoreButton);
 let game; // переменная для объекта, глобальная чтобы удалить при возврате
 let stateGame = 2; // храним состояние игры для управления кнопками 1 - есть сохранённая игра, 2 - нет сохранённой игры
 let stateGameSPA = 2; // 1 - игра идёт, 2 - игры нет
-let matrxixPage; // сохраняем для SPA
-let srcPage; // сохраняем для SPA
-let sizePage; // сохраняем для SPA
-let widthPage; // сохраняем для SPA
-let heigthPage; // сохраняем для SPA
-let moveCountPage;// сохраняем для SPA
 chooseSize.addEventListener('click', getPuzzel);
 function getPuzzel () {
     // удаляем элементы
@@ -112,7 +102,7 @@ function getPuzzel () {
     moveCount.textContent = 0;
 
     // создаём объект с игрой
-    game = new Game (sizeChecked, imageWidth, imageHeigth);
+    game = new Game (sizeChecked);
     let viewGame = new ViewGame (game);
     let controllerGame = new ControllerGame (game);
     game.createElem(imageSrc);
@@ -124,14 +114,8 @@ function getPuzzel () {
     controllerGame.moveNodeTouch();
     controllerGame.moveNodeArrow();
     game.shuffleTimer();
-    matrxixPage = game.matrix;
-    srcPage = game.src;
-    sizePage = game.sizeChecked;
-    widthPage = game.width;
-    heigthPage = game.heigth;
-    moveCountPage = game.moveCount;
-    storeInfoSPA();
-    switchToGamePage();
+    let image = imageSrc.split('image/');
+    switchToGamePage (image[1], game.sizeChecked)
 }
 // действия при нажатии на кнопку новая игра
 buttonStartAgain.addEventListener('click', stratNewGame);

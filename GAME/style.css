@@ -266,6 +266,13 @@ html {
         margin: 0 auto;
         user-select: none;
     }
+    .container-game {
+        width: 600px;
+        height: 600px;
+    }
+    .item {
+        background-size: 600px 600px;
+    }
     .picture {
         width: 600px;
         height: 600px;
@@ -278,6 +285,13 @@ html {
 @media (max-width: 1000px) {
     .slider-list {
         width: 400px;
+    }
+    .container-game {
+        width: 400px;
+        height: 400px;
+    }
+    .item {
+        background-size: 400px 400px;
     }
     .picture {
         width: 400px;
@@ -301,6 +315,13 @@ html {
 @media (max-width: 420px) {
     .slider-list {
         width: 200px;
+    }
+    .container-game {
+        width: 200px;
+        height: 200px;
+    }
+    .item {
+        background-size: 200px 200px;
     }
     .picture {
         width: 200px;

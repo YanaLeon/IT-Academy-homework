@@ -1,14 +1,11 @@
 "use strict";
 // создаём класс для игры
-function Game (sizeChecked, imageWidth, imageHeigth) {
+function Game (sizeChecked) {
     let self = this;
     self.sizeChecked = Number(sizeChecked);
     self.size = sizeChecked * sizeChecked;
-    self.width = imageWidth;
-    self.heigth = imageHeigth;
     self.matrix = [];
     self.moveCount = 0;
-    // self.check = 0;
 }
 Game.prototype.start = function (view) {
     let self = this;
@@ -28,15 +25,12 @@ Game.prototype.createElem = function (src) {
     self.src = src;
     let field = document.createElement('div');
     field.classList.add('container-game');
-    field.style.width = `${self.width}px`;
-    field.style.height = `${self.heigth}px`;
     galleryContainer.appendChild(field);
     self.field = field;
     for (let i = 0; i < self.size; i++) {
         let item = document.createElement('button');
         item.setAttribute('data-number', `${i + 1}`);
         item.style.backgroundImage = `url(${self.src})`;
-        item.style.backgroundSize = `${self.width}px ${self.heigth}px`;
         item.classList.add('item');
         if (self.sizeChecked == 4) {
             item.classList.add('item-four');
@@ -62,7 +56,7 @@ Game.prototype.getMatrix = function () {
         arrayX.push(i + 1);
         x++;
     }
-    return self.matrix, self.itemNodeList;
+    return self.matrix;
 }
 Game.prototype.getPosition = function (item) {
     let self = this;
