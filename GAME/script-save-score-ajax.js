@@ -13,8 +13,6 @@ function saveData () {
     dataMatrix = game.matrix;
     dataSize = game.sizeChecked;
     dataSrc = game.src;
-    dataWidth = game.width;
-    dataHeigth = game.heigth;
     dataMoveCount = game.moveCount;
     buttonSave.classList.add('hide');
     buttonContinue.classList.remove('hide');
@@ -33,7 +31,6 @@ let ajaxHandlerScript = "https://fe.it-academy.by/AjaxStringStorage2.php";
 let updatePassword;
 let stringNameSave = 'LEONOVICH_PUZZEL_SAVE_GAME';
 let stringNameScore = 'LEONOVICH_PUZZEL_SCORE';
-let stringNameSPA = 'LEONOVICH_PUZZEL_SPA';
 // сохрание игры
 function storeInfo() {
     updatePassword = Math.random();
@@ -43,6 +40,7 @@ function storeInfo() {
         success : lockGetReady, error : errorHandler
     });
 }
+
 function lockGetReady(callresult) {
     if ( callresult.error != undefined )
         console.log(callresult.error);
@@ -51,8 +49,6 @@ function lockGetReady(callresult) {
             matrix : dataMatrix,
             size : dataSize,
             src : dataSrc,
-            width : dataWidth,
-            heigth : dataHeigth,
             moveCount : dataMoveCount
         };
         $.ajax({
@@ -82,7 +78,7 @@ function readReady(callresult) {
         let info = JSON.parse(callresult.result);
         console.log(info);
         game.delete();
-        game = new Game (info.size, info.width, info.heigth);
+        game = new Game (info.size);
         let viewGame = new ViewGame (game);
         let controllerGame = new ControllerGame (game);
         game.createElem(info.src);
@@ -244,156 +240,122 @@ function tick() {
 }
 
 // SPA
-// сохрание игры при каждой загрузке
-function storeInfoSPA() {
-    updatePassword = Math.random();
-    $.ajax({
-        url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-        data : { f : 'LOCKGET', n : stringNameSPA, p : updatePassword },
-        success : lockGetReadySPA, error : errorHandlerSPA
-    });
-}
-function lockGetReadySPA(callresult) {
-    if ( callresult.error != undefined )
-        console.log(callresult.error);
-    else {
-        let page = {
-            matrix : matrxixPage,
-            size : sizePage,
-            src : srcPage,
-            width : widthPage,
-            heigth : heigthPage,
-            moveCount : moveCountPage
-        };
-        $.ajax({
-            url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-            data : { f : 'UPDATE', n : stringNameSPA,
-            v : JSON.stringify(page), p : updatePassword },
-            success : updateReadySPA, error : errorHandlerSPA
-        });
-    }
-}
-function updateReadySPA(callresult) {
-    if ( callresult.error != undefined ) {
-        console.log(callresult.error);
-    }
-}
-function restoreInfoSPA() {
-    $.ajax({
-        url : ajaxHandlerScript, type : 'POST', cache : false, dataType:'json',
-        data : { f : 'READ', n : stringNameSPA },
-        success : readReadySPA, error : errorHandlerSPA
-    });
-}
-function readReadySPA(callresult) {
-    if ( callresult.error != undefined ) {
-        console.log(callresult.error);
-    } else if ( callresult.result != "" ) {
-        let page = JSON.parse(callresult.result);
-        console.log(page);
-        game = new Game (page.size, page.width, page.heigth);
-        let viewGame = new ViewGame (game);
-        let controllerGame = new ControllerGame (game);
-        game.createElem(page.src);
-        stateGameSPA = 1;
-        game.getMatrix();
-        game.start(viewGame);
-        game.matrix = page.matrix;
-        game.moveCount = page.moveCount;
-        moveCount.textContent = game.moveCount;
-        game.updateView();
-        controllerGame.moveNodeClick();
-        controllerGame.moveNodeTouch();
-        controllerGame.moveNodeArrow();
-    }
-}
-
-function errorHandlerSPA(jqXHR,statusStr,errorStr) {
-    console.log(statusStr+' '+errorStr);
-}
 // в закладке УРЛа будем хранить разделённые подчёркиваниями слова
 // #Main - главная
-// #Game - игра
-
+// #Game_imge_size - игра
 // отслеживаем изменение закладки в УРЛе
 // оно происходит при любом виде навигации
 // в т.ч. при нажатии кнопок браузера ВПЕРЁД/НАЗАД
 window.onhashchange = switchToStateFromURLHash;
+
+// текущее состояние приложения
+// это Model из MVC
 let SPAState = {};
+
+
+// вызывается при изменении закладки УРЛа
+// а также при первом открытии страницы
+// читает новое состояние приложения из закладки УРЛа
 function switchToStateFromURLHash() {
     let URLHash = window.location.hash;
-
-    // убираем из закладки УРЛа решётку
-    // (по-хорошему надо ещё убирать восклицательный знак, если есть)
     let stateStr = URLHash.substr(1);
 
-    if ( stateStr != "" ) {
+    if ( stateStr != "" ) { // если закладка непустая, читаем из неё состояние и отображаем
       let parts = stateStr.split("_")
       SPAState = { pagename: parts[0] };
+      if ( SPAState.pagename == 'Game' ) {
+        SPAState.image = parts[1];
+        SPAState.size = parts[2];
+      }
     } else {
-        SPAState = {pagename:'Main'};
+        SPAState = {pagename:'Main'}; // иначе показываем главную страницу
     }
 
     console.log('Новое состояние приложения:');
     console.log(SPAState);
-
+    // обновляем вариабельную часть страницы под текущее состояние
+    // это реализация View из MVC - отображение состояния модели в HTML-код
     switch ( SPAState.pagename ) {
-      case 'Main':
-        game.delete();
-        stateGameSPA = 2;
-        arrow.classList.remove('hide');
-        sliderList.classList.remove('hide');
-        buttonStartGame.classList.remove('hide');
-        title.classList.remove('hide');
-        buttonReturn.classList.add('hide');
-        buttonStartAgain.classList.add('hide');
-        buttonScore.classList.add('hide');
-        buttonSave.classList.add('hide');
-        buttonContinue.classList.add('hide');
-        move.classList.add('hide');
+        case 'Main':
+            game.delete();
+            stateGameSPA = 2;
+            arrow.classList.remove('hide');
+            sliderList.classList.remove('hide');
+            buttonStartGame.classList.remove('hide');
+            title.classList.remove('hide');
+            buttonReturn.classList.add('hide');
+            buttonStartAgain.classList.add('hide');
+            buttonScore.classList.add('hide');
+            buttonSave.classList.add('hide');
+            buttonContinue.classList.add('hide');
+            move.classList.add('hide');
         break;
-      case 'Game':
-        if (stateGameSPA === 2) {
-            restoreInfoSPA();
-            // удаляем элементы
-            modalWindow.classList.add('hide');
-            arrow.classList.add('hide');
-            sliderList.classList.add('hide');
-            title.classList.add('hide');
-            buttonStartGame.classList.add('hide');
-            //добавляем элементы
-            buttonContainer.appendChild(buttonReturn);
-            buttonReturn.classList.remove('hide');
-            divContainerButtonFooter.appendChild(buttonStartAgain);
-            buttonStartAgain.classList.remove('hide');
-            divContainerButtonFooter.appendChild(buttonScore);
-            buttonScore.classList.remove('hide');
-            divContainerButtonFooter.appendChild(buttonSave);
-            divContainerButtonFooter.appendChild(buttonContinue);
-            if (stateGame === 2) {
-                buttonSave.classList.add('hide');
-                buttonContinue.classList.remove('hide');
-            } else {
-                buttonSave.classList.remove('hide');
-                buttonContinue.classList.add('hide');
+        case 'Game':
+            if (stateGameSPA === 2) {
+                // удаляем элементы
+                modalWindow.classList.add('hide');
+                arrow.classList.add('hide');
+                sliderList.classList.add('hide');
+                title.classList.add('hide');
+                buttonStartGame.classList.add('hide');
+                //добавляем элементы
+                buttonContainer.appendChild(buttonReturn);
+                buttonReturn.classList.remove('hide');
+                divContainerButtonFooter.appendChild(buttonStartAgain);
+                buttonStartAgain.classList.remove('hide');
+                divContainerButtonFooter.appendChild(buttonScore);
+                buttonScore.classList.remove('hide');
+                divContainerButtonFooter.appendChild(buttonSave);
+                divContainerButtonFooter.appendChild(buttonContinue);
+                if (stateGame === 1) {
+                    buttonSave.classList.add('hide');
+                    buttonContinue.classList.remove('hide');
+                } else {
+                    buttonSave.classList.remove('hide');
+                    buttonContinue.classList.add('hide');
+                }
+                move.classList.remove('hide');
+                moveCount.textContent = 0;
+                game = new Game (Number(SPAState.size));
+                let viewGame = new ViewGame (game);
+                let controllerGame = new ControllerGame (game);
+                game.createElem(`image/${SPAState.image}`);
+                stateGameSPA = 1;
+                game.getMatrix();
+                game.start(viewGame);
+                game.updateView();
+                console.log(game);
+                controllerGame.moveNodeClick();
+                controllerGame.moveNodeTouch();
+                controllerGame.moveNodeArrow();
+                game.shuffleTimer();
             }
-            move.classList.remove('hide');
-            moveCount.textContent = 0;
-        }
         break;
     }
 }
+
+// устанавливает в закладке УРЛа новое состояние приложения
+// и затем устанавливает+отображает это состояние
 function switchToState(newState) {
+    // устанавливаем закладку УРЛа
+    // нужно для правильной работы кнопок навигации браузера
+    // (т.к. записывается новый элемент истории просмотренных страниц)
+    // и для возможности передачи УРЛа другим лицам
     let stateStr = newState.pagename;
+    if ( newState.pagename == 'Game' )
+      stateStr += "_"+newState.image+"_"+newState.gameSize;
     location.hash = stateStr;
+
     // АВТОМАТИЧЕСКИ вызовется switchToStateFromURLHash()
     // т.к. закладка УРЛа изменилась (ЕСЛИ она действительно изменилась)
 }
+
 function switchToMainPage() {
-    switchToState( { pagename:'Main' } );
+  switchToState( { pagename:'Main' } );
 }
-function switchToGamePage() {
-    switchToState( { pagename:'Game'} );
+function switchToGamePage (src, size) {
+  switchToState( { pagename:'Game', image: src, gameSize: size} );
 }
+
 // переключаемся в состояние, которое сейчас прописано в закладке УРЛ
 switchToStateFromURLHash();
