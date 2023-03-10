@@ -71,7 +71,6 @@ html {
 .main {
     display: flex;
     justify-content: center;
-    padding: 0.5rem;
     overflow: hidden;
 }
 .container-gallery {
@@ -177,8 +176,6 @@ html {
     }
     .main {
         flex-direction: column;
-        padding-left: 1rem;
-        padding-right: 1rem;
     }
     .container-button-footer {
         padding-left: 1rem;
