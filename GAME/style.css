@@ -10,7 +10,6 @@ html {
     font: 16px Georgia, serif;
     background-color: rgb(2, 39, 72);
     max-width: 1600px;
-    min-width: 300px;
     user-select: none;
     overflow: auto;
 }
@@ -19,20 +18,14 @@ html {
     margin: 0 auto;
     text-align: center;
     margin-bottom: 0.5rem;
+    max-width: 900px;
 }
-.title-text-game {
-    font-family: 'Lobster', cursive;
-    color: white;
-}
-.title-text-name {
+.title-text-game, .title-text-name {
     font-family: 'Lobster', cursive;
     color: white;
 }
 
 @media (max-width: 1600px) {
-    .container-tatile {
-        max-width: 900px;
-    }
     .title-text-game {
         font-size: 1.5rem;
     }
@@ -79,23 +72,24 @@ html {
     display: flex;
     justify-content: center;
     padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding-left: 6rem;
-    padding-right: 6rem;
+    overflow: hidden;
+}
+.container-gallery {
+    overflow: hidden;
+    width: 600px;
 }
 .container-navigation {
     display: flex;
     flex-direction: column;
     justify-content: center;
     order: 1;
-    margin: 0 auto;
+    width: 300px;
 }
 .container-button {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    flex-direction: column;
 }
 .wrapper-button {
     width: 70%;
@@ -154,16 +148,6 @@ html {
     opacity: 1;
     pointer-events: auto;
 }
-.div-time-move {
-    padding: 0.5rem;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-.time {
-    font-family: 'Lobster', cursive;
-    color: white;
-}
 .wrapper-move {
     text-align: center;
     margin: 15px;
@@ -173,22 +157,13 @@ html {
     color: white;
 }
 @media (max-width: 1600px) {
-    .container-gallery {
-        max-width: 900px;
-        margin: 1rem;
-        flex-basis: 900px;
-    }
-    .container-navigation {
-        width: 350px;
-    }
     .start-game-button, .text-music, .move-text, .move-number {
         font-size: 1.2rem;
     }
 }
 @media (max-width: 1000px) {
     .container-gallery {
-        max-width: 600px;
-        flex-basis: 600px;
+        width: 600px;
     }
     .start-game-button, .text-music, .move-text, .move-number {
         font-size: 1rem;
@@ -196,10 +171,9 @@ html {
 }
 @media (max-width: 640px) {
     .container-gallery {
-        max-width: 400px;
+        width: 400px;
         order: 2;
         margin: 0 auto;
-        flex-basis: 400px;
     }
     .main {
         flex-direction: column;
@@ -213,11 +187,13 @@ html {
     .container-button {
         flex-direction: row;
     }
+    .container-navigation {
+        margin: 0 auto;
+    }
 }
 @media (max-width: 420px) {
     .container-gallery {
-        max-width: 200px;
-        flex-basis: 200px;
+        width: 200px;
     }
     .start-game-button, .text-music, .move-text, .move-number {
         font-size: 0.5rem;
@@ -238,7 +214,6 @@ html {
         height: 30px;
     }
 }
-
 .picture-content {
     display: flex;
     align-items: center;
@@ -246,7 +221,6 @@ html {
 }
 .picture-discription {
     background-color: white;
-    margin-left: 1rem;
     width: 80%;
     padding: 1rem;
     box-shadow: 2px 2px 3px 3px rgb(151, 150, 150);
@@ -259,24 +233,24 @@ html {
     transform: translate3d(0px, 0px, 0px);
     transition: transform 0.5s ease 0s;
 }
+.picture {
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+}
+.container-game {
+    width: 600px;
+    height: 600px;
+}
+.item {
+    background-size: 600px 600px;
+}
 @media (max-width: 1600px) {
     .slider-list {
         width: 600px;
         overflow: hidden;
         margin: 0 auto;
         user-select: none;
-    }
-    .container-game {
-        width: 600px;
-        height: 600px;
-    }
-    .item {
-        background-size: 600px 600px;
-    }
-    .picture {
-        width: 600px;
-        height: 600px;
-        pointer-events: none;
     }
     .picture-discription-text {
         font-size: 1rem;
@@ -445,8 +419,7 @@ input.choose-size:checked + label.choose-size-name{
     }
 }
 @media (max-width: 420px) {
-    .modal-window, .modal-window-won
-     {
+    .modal-window, .modal-window-won {
         width: 200px;
     }
     .modal-choose-text {
@@ -578,5 +551,8 @@ input.choose-size:checked + label.choose-size-name{
     .container-won-table {
         width: 150px;
         height: 200px;
+    }
+    .bar {
+        width: 15px;
     }
 }
